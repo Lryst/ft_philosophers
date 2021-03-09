@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 19:10:00 by lryst             #+#    #+#              #
-#    Updated: 2021/03/07 19:51:13 by lryst            ###   ########.fr        #
+#    Updated: 2021/03/09 08:32:42 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CFLAGSF = -g3 -fsanitize=address -Wall -Wextra -Werror
 SRC := \
 	init.c \
 	main.c \
+	philo_actions.c \
 	philo_routine.c \
 	utils.c \
 

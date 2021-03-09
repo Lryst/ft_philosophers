@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:48 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/07 20:08:47 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/09 09:02:17 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ int		start(char **av)
 
 int 	main(int ac, char **av)
 {
+	int i;
+
+	i = 0;
+	while (i < 7)
+	{
+		printf("%d\n", i);
+		i++;
+	}
+	printf("\n");
 	if (ac == 5 || ac == 6)
 	{
 		if (start(av) == 0)

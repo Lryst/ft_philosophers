@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:09:13 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/08 16:00:10 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/09 08:38:40 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct  s_info
 ** init.c
 */
 int		init_mutex_tab(t_mutex **mutex_tab, int len);
-void	init_philo_param(t_info *info, t_philo *philo);
+int     init_philo_param(t_info *info, t_philo *philo);
 int     init_thread_tab(t_info *info);
 
 /*
@@ -69,7 +69,9 @@ int 	main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-
+int eat_pair(t_philo *philo, int right, int left);
+int	eat_impair(t_philo *philo, int right, int left);
+int prep_eat(t_philo *philo);
 
 /*
 ** philo_routine.c
