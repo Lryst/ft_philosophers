@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/07 21:53:47 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/09 14:51:59 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		ft_atoi_lite(char *str)
 	}
 	if (nbr == 0)
 		return (-1);
-	printf("		ATOI %d\n", nbr);
 	return (nbr);
 }
 
@@ -59,19 +58,16 @@ int		monitor(t_info *info)
 	while (1)
 	{
 		i = 0;
-		while (info->philo[i])
+		while (i < info->arg1)
 		{
-			//write(1, "coucou\n", 7);
-			if (info->philo[i]->start == 0)
+			if (info->philo[i].start == 0)
 			{
 				printf("%ldms philo %d die\n",(get_time() - chrono), i);
 				//pthread_detach(philo[i]->thread);
 				i = 0;
-				while (info->philo[i])
+				while (i < info->arg1)
 				{
-					//write(1, "coucou\n", 7);
-					info->philo[i++]->start = 0;
-					//pthread_detach(philo[i]->thread);
+					info->philo[i++].start = 0;
 				}
 				return(0) ;
 			}
@@ -81,7 +77,7 @@ int		monitor(t_info *info)
 	return (1);
 }
 
-int     free_mutex_tab(t_mutex **mutex_tab)
+/* int     free_mutex_tab(t_mutex *mutex_tab)
 {
 	int i;
 
@@ -90,7 +86,7 @@ int     free_mutex_tab(t_mutex **mutex_tab)
 	{
 		while (mutex_tab[i])
 		{
-			pthread_mutex_destroy(&mutex_tab[i]->mutex);
+			pthread_mutex_destroy(&mutex_tab[i].mutex);
 			i++;
 		}
 		free(mutex_tab);
@@ -98,3 +94,4 @@ int     free_mutex_tab(t_mutex **mutex_tab)
 	}
 	return (0);
 }
+ */

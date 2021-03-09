@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:09:13 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 08:38:40 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/09 17:02:22 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef	struct	s_mutex
 typedef struct  s_philo
 {
     pthread_t   thread;
-    t_mutex     **mutex_tab;
+    t_mutex     *mutex_l;
+    t_mutex     *mutex_r;
     int         r_turn;
     int         nbr;
     long        life;
@@ -36,7 +37,10 @@ typedef struct  s_philo
     int         start;
     int         i;
     int         turn;
-    long        start_chrono;
+    long        top;
+    long        r_chrono;
+    long        l_chrono;
+    int         status;
 }               t_philo;
 
 typedef struct  s_info
@@ -47,16 +51,17 @@ typedef struct  s_info
     long        arg4;
     int         arg5;
     int         i;
-    t_mutex     **mutex_tab;
-    t_philo     **philo;
+    long        top_chrono;
+    t_mutex     *mutex_tab;
+    t_philo     *philo;
     pthread_mutex_t totem;
 }               t_info;
 
 /*
 ** init.c
 */
-int		init_mutex_tab(t_mutex **mutex_tab, int len);
-int     init_philo_param(t_info *info, t_philo *philo);
+int		init_mutex_tab(t_info *info);
+void    init_philo_param(t_info *info, t_philo *philo);
 int     init_thread_tab(t_info *info);
 
 /*
@@ -69,15 +74,15 @@ int 	main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-int eat_pair(t_philo *philo, int right, int left);
-int	eat_impair(t_philo *philo, int right, int left);
-int prep_eat(t_philo *philo);
+void    philo_think(t_philo *philo);
+int	philo_sleep(t_philo *philo);
+int philo_eat(t_philo *philo);
 
 /*
 ** philo_routine.c
 */
 int recover_args(char **av);
-void	test(t_info *info);
+void	test(void *tmp);
 
 
 /*
@@ -88,6 +93,6 @@ void	print_values_chrono(long chrono);
 //void	print_values_philo(t_philo *philo);
 int		ft_atoi_lite(char *str);
 int		monitor(t_info *info);
-int     free_mutex_tab(t_mutex **mutex_tab);
+int     free_mutex_tab(t_mutex *mutex_tab);
 
 #endif
