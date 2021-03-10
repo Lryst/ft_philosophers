@@ -6,13 +6,13 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:48 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 07:28:18 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 15:07:05 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		check_args(char **av)
+int	check_args(char **av)
 {
 	int i;
 	int j;
@@ -32,13 +32,13 @@ int		check_args(char **av)
 	return (1);
 }
 
-int		start(char **av)
+int	start(char **av)
 {
 	if (check_args(av) == 0)
 		return (0);
 	if (av[1][0] == '1')
 	{
-		write (1, "0ms 1 die\n", 10);
+		write(1, "0ms 1 die\n", 10);
 		return (0);
 	}
 	if (recover_args(av) == 0)
@@ -46,16 +46,14 @@ int		start(char **av)
 	return (1);
 }
 
-int 	main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac == 5 || ac == 6)
 	{
 		if (start(av) == 0)
-			return (write (1, "We have a probleme !\n", 21));
+			return (write(1, "We have a probleme !\n", 21));
 	}
 	else
-	{	
 		write(1, "Bad arguments\n", 14);
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 14:13:12 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 17:08:41 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 long	get_time(void)
 {
-	struct timeval tmp_time;
+	struct timeval	tmp_time;
 	long			ms;
 
 	gettimeofday(&tmp_time, NULL);
 	ms = tmp_time.tv_sec * 1000;
 	ms += tmp_time.tv_usec / 1000;
 	return (ms);
-}
-  
-void		print_values_chrono(long chrono)
-{
-	printf("%ldms\n", get_time() - chrono);
 }
 
 int		ft_atoi_lite(char *str)
@@ -51,7 +46,7 @@ int		ft_atoi_lite(char *str)
 int		monitor_check_count_meal(t_info *info)
 {
 	int i;
-	
+
 	i = 0;
 	while (i < info->arg1 && info->philo[i].nbr_turn == 1)
 		i++;
@@ -64,7 +59,7 @@ int		monitor(t_info *info)
 {
 	int		i;
 	long	chrono;
-	
+
 	chrono = get_time();
 	while (1)
 	{
@@ -76,33 +71,14 @@ int		monitor(t_info *info)
 					return (1);
 			if (info->philo[i].start == 0)
 			{
-				printf("%ldms philo %d die\n",(get_time() - chrono), i);
+				printf("%ldms philo %d die\n", (get_time() - chrono), i);
 				i = 0;
 				while (i < info->arg1)
 					info->philo[i++].start = 0;
-				return(0) ;
+				return (0);
 			}
 			i++;
 		}
 	}
 	return (1);
 }
-
-/* int     free_mutex_tab(t_mutex *mutex_tab)
-{
-	int i;
-
-	i = 0;
-	if (mutex_tab)
-	{
-		while (mutex_tab[i])
-		{
-			pthread_mutex_destroy(&mutex_tab[i].mutex);
-			i++;
-		}
-		free(mutex_tab);
-		mutex_tab = NULL;
-	}
-	return (0);
-}
- */
