@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 09:44:44 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 14:13:12 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,23 @@ int		ft_atoi_lite(char *str)
 	return (nbr);
 }
 
+int		monitor_check_count_meal(t_info *info)
+{
+	int i;
+	
+	i = 0;
+	while (i < info->arg1 && info->philo[i].nbr_turn == 1)
+		i++;
+	if (i == info->arg1)
+		return (1);
+	return (0);
+}
+
 int		monitor(t_info *info)
 {
 	int		i;
 	long	chrono;
 	
-	i = 0;
 	chrono = get_time();
 	while (1)
 	{
@@ -61,16 +72,14 @@ int		monitor(t_info *info)
 		while (i < info->arg1)
 		{
 			if (info->philo[i].nbr_turn == 1)
-				return (1);
+				if (monitor_check_count_meal(info) == 1)
+					return (1);
 			if (info->philo[i].start == 0)
 			{
 				printf("%ldms philo %d die\n",(get_time() - chrono), i);
-				//pthread_detach(philo[i]->thread);
 				i = 0;
 				while (i < info->arg1)
-				{
 					info->philo[i++].start = 0;
-				}
 				return(0) ;
 			}
 			i++;
