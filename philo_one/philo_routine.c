@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 17:21:42 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 09:40:30 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	test(void *tmp)
 {
 	t_philo	*philo;
 	
-	//return ;
 	philo = (t_philo*)tmp;
-	//printf("philo->i = %d\n", philo->i);
 	philo->status = 1;
 	philo->top = get_time();
-	philo->r_chrono = get_time();
+	philo->nbr_turn = 0;
 	while (philo->start == 1)
 	{
 		/* if (philo->turn != -1)
 			if (philo->r_turn == philo->turn)
 				return; */
+		philo->l_chrono = get_time();
 		if (philo_eat(philo) == 0)
 			philo->start = 0;
 		if (philo_sleep(philo) == 0)
 			philo->start = 0;
-		philo_think(philo);
-		if ((get_time() - philo->l_chrono) > philo->life)
+		if (philo_think(philo) == 0)
 			philo->start = 0;
+		/* if ((get_time() - philo->l_chrono) > philo->life)
+			philo->start = 0; */
 	}
 }
 
@@ -47,7 +47,7 @@ int    register_arg(char **av, t_info *info)
 	{
 		info->arg5= ft_atoi_lite(av[5]);
 		if (info->arg5 == -1)
-			return(printf("I don't take a 0 for number of turns arguments, sorry\n"));
+			return(write (1, "I don't take a 0 for number of turns arguments, sorry\n", 54));
 	}
 	else
 		info->arg5 = -1;

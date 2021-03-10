@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:48 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 16:42:16 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 07:28:18 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		start(char **av)
 		return (0);
 	if (av[1][0] == '1')
 	{
-		printf("0ms 1 die\n");
+		write (1, "0ms 1 die\n", 10);
 		return (0);
 	}
 	if (recover_args(av) == 0)
@@ -51,7 +51,7 @@ int 	main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		if (start(av) == 0)
-			return (printf("We have a probleme !\n"));
+			return (write (1, "We have a probleme !\n", 21));
 	}
 	else
 	{	

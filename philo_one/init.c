@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 15:46:15 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 07:28:25 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		init_mutex_tab(t_info *info)
 	int i;
 
 	i = 0;
-	printf("%d\n", info->arg1);
+	//printf("%d\n", info->arg1);
 	if (!(info->mutex_tab = (t_mutex*)malloc(sizeof(t_mutex) * info->arg1)))
 		return (0);
 	while (i < info->arg1)
@@ -75,7 +75,7 @@ int     init_thread_tab(t_info *info)
 	{
 		//info->philo[info->i].start = 0;
 		init_philo_param(info, &info->philo[info->i]);
-		printf("%d - philo->i = %d\n", info->i, info->philo[info->i].i);
+		//printf("%d - philo->i = %d\n", info->i, info->philo[info->i].i);
 		//info->philo[info->i].i = info->i;
 		//exit (1);
 		if (pthread_create(&info->philo[info->i].thread, NULL, (void*)test, &info->philo[info->i]) != 0)

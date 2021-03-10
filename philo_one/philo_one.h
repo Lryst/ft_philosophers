@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:09:13 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 17:02:22 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 09:27:02 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct  s_philo
     long        r_chrono;
     long        l_chrono;
     int         status;
+	int			nbr_turn;
 }               t_philo;
 
 typedef struct  s_info
@@ -74,7 +75,7 @@ int 	main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-void    philo_think(t_philo *philo);
+int	philo_think(t_philo *philo);
 int	philo_sleep(t_philo *philo);
 int philo_eat(t_philo *philo);
 

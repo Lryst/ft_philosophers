@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/09 14:51:59 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/10 09:44:44 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	get_time(void)
 	ms += tmp_time.tv_usec / 1000;
 	return (ms);
 }
-
+  
 void		print_values_chrono(long chrono)
 {
 	printf("%ldms\n", get_time() - chrono);
@@ -60,6 +60,8 @@ int		monitor(t_info *info)
 		i = 0;
 		while (i < info->arg1)
 		{
+			if (info->philo[i].nbr_turn == 1)
+				return (1);
 			if (info->philo[i].start == 0)
 			{
 				printf("%ldms philo %d die\n",(get_time() - chrono), i);
