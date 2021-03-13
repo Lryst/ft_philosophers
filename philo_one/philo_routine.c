@@ -23,12 +23,9 @@ void	test(void *tmp)
 	philo->l_chrono = get_time();
 	while (philo->start == 1)
 	{
-		if (philo_eat(philo) == 0)
-			philo->start = 0;
-		if (philo_sleep(philo) == 0)
-			philo->start = 0;
-		if (philo_think(philo) == 0)
-			philo->start = 0;
+		philo_eat(philo);
+		philo_sleep(philo);
+		philo_think(philo);
 	}
 }
 

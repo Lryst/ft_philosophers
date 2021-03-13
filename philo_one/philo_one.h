@@ -76,9 +76,9 @@ int					main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-int					philo_think(t_philo *philo);
-int					philo_sleep(t_philo *philo);
-int					philo_eat(t_philo *philo);
+void				philo_think(t_philo *philo);
+void				philo_sleep(t_philo *philo);
+void				philo_eat(t_philo *philo);
 
 /*
 ** philo_routine.c

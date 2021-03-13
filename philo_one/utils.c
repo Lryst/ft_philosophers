@@ -58,9 +58,8 @@ int		monitor_check_count_meal(t_info *info)
 int		monitor(t_info *info)
 {
 	int		i;
-	long	chrono;
+	pthread_mutex_t	mutex;
 
-	chrono = get_time();
 	while (1)
 	{
 		i = 0;
@@ -69,12 +68,16 @@ int		monitor(t_info *info)
 			if (info->philo[i].nbr_turn == 1)
 				if (monitor_check_count_meal(info) == 1)
 					return (1);
-			if (info->philo[i].start == 0)
+			usleep(1);
+			if ((get_time() - (info->philo[i].l_chrono)) > info->philo[i].life)
 			{
-				printf("%ldms philo %d die\n", (get_time() - chrono), i);
+				pthread_mutex_init(&mutex, NULL);
+				pthread_mutex_lock(&mutex);
+				printf("%ldms philo %d die\n", (get_time() - info->philo[i].top), i);
 				i = 0;
 				while (i < info->arg1)
 					info->philo[i++].start = 0;
+				pthread_mutex_unlock(&mutex);
 				return (0);
 			}
 			i++;
