@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:48 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 15:07:05 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 13:27:47 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ int	check_args(char **av)
 
 int	start(char **av)
 {
+	int	arg1;
+
+	arg1 = ft_atoi_lite(av[1]);
 	if (check_args(av) == 0)
 		return (0);
-	if (av[1][0] == '1')
+	if (arg1 == 1)
 	{
 		write(1, "0ms 1 die\n", 10);
 		return (0);

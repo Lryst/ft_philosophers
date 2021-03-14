@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 17:07:54 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:19:59 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_think(t_philo *philo)
 {
-	if (philo->status == 3)
+	while (philo->status == 3)
 	{
 		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
 		philo->status = 1;
@@ -25,7 +25,7 @@ void	philo_sleep(t_philo *philo)
 {
 	long	chrono;
 
-	if (philo->status == 2)
+	while (philo->status == 2)
 	{
 		chrono = get_time();
 		printf("%ldms %d is sleeping\n", (get_time() - philo->top), philo->i);

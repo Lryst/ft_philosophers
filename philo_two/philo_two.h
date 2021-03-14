@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:52:52 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/11 15:26:51 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 13:59:19 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef struct		s_info
 	int				i;
 	long			top_chrono;
 	sem_t			*sem;
+	sem_t			*totem;
 	t_philo			*philo;
 }					t_info;
 
 /*
 ** init.c
 */
-int					init_mutex_tab(t_info *info);
-void				init_fork(t_info *info, t_philo *philo);
+int					lauch_philo(t_info *info, int i);
 void				init_philo_param(t_info *info, t_philo *philo);
 int					init_thread_tab(t_info *info);
 
@@ -77,9 +77,9 @@ int					main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-int					philo_think(t_philo *philo);
-int					philo_sleep(t_philo *philo);
-int					philo_eat(t_philo *philo);
+void				philo_think(t_philo *philo);
+void				philo_sleep(t_philo *philo);
+void				philo_eat(t_philo *philo);
 
 /*
 ** philo_routine.c

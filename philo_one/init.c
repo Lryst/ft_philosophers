@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 15:05:40 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:14:11 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	init_philo_param(t_info *info, t_philo *philo)
 
 int		init_thread_tab(t_info *info)
 {
+	long	chrono;
+
+	chrono = get_time();
 	info->i = 0;
 	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
@@ -81,7 +84,20 @@ int		init_thread_tab(t_info *info)
 			write(1, "pair GameOver\n", 14);
 			return (0);
 		}
-		info->i++;
+		info->i += 2;
+	}
+	usleep(2);
+	info->i = 1;
+	while (info->i < info->arg1)
+	{
+		init_philo_param(info, &info->philo[info->i]);
+		if (pthread_create(&info->philo[info->i].thread, NULL,
+			(void*)test, &info->philo[info->i]) != 0)
+		{
+			write(1, "pair GameOver\n", 14);
+			return (0);
+		}
+		info->i += 2;
 	}
 	monitor(info);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 17:08:41 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:23:59 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,23 @@ int		monitor_check_count_meal(t_info *info)
 	return (0);
 }
 
+int		philo_die(t_info *info, int i)
+{
+	pthread_mutex_t	mutex;
+	
+	pthread_mutex_init(&mutex, NULL);
+	pthread_mutex_lock(&mutex);
+	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i);
+	i = 0;
+	while (i < info->arg1)
+		info->philo[i++].start = 0;
+	pthread_mutex_unlock(&mutex);
+	return (0);
+}
+
 int		monitor(t_info *info)
 {
 	int		i;
-	pthread_mutex_t	mutex;
 
 	while (1)
 	{
@@ -68,18 +81,9 @@ int		monitor(t_info *info)
 			if (info->philo[i].nbr_turn == 1)
 				if (monitor_check_count_meal(info) == 1)
 					return (1);
-			usleep(1);
+			usleep(7);
 			if ((get_time() - (info->philo[i].l_chrono)) > info->philo[i].life)
-			{
-				pthread_mutex_init(&mutex, NULL);
-				pthread_mutex_lock(&mutex);
-				printf("%ldms philo %d die\n", (get_time() - info->philo[i].top), i);
-				i = 0;
-				while (i < info->arg1)
-					info->philo[i++].start = 0;
-				pthread_mutex_unlock(&mutex);
-				return (0);
-			}
+				return (philo_die(info, i));
 			i++;
 		}
 	}

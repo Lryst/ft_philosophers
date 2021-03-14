@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/10 17:25:56 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:03:46 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ void	test(void *tmp)
 
 int		register_arg(char **av, t_info *info)
 {
-	info->arg1 = ft_atoi_lite(av[1]);
-	info->arg2 = ft_atoi_lite(av[2]);
-	info->arg3 = ft_atoi_lite(av[3]);
-	info->arg4 = ft_atoi_lite(av[4]);
+	if (info->arg1 == -1 || info->arg2 == -1 ||
+		info->arg3 == -1 || info->arg4 == -1)
+		return (0);
 	if (av[5])
 	{
 		info->arg5 = ft_atoi_lite(av[5]);
@@ -55,6 +54,10 @@ int		recover_args(char **av)
 {
 	t_info	info;
 
+	info.arg1 = ft_atoi_lite(av[1]);
+	info.arg2 = ft_atoi_lite(av[2]);
+	info.arg3 = ft_atoi_lite(av[3]);
+	info.arg4 = ft_atoi_lite(av[4]);
 	if (register_arg(av, &info) != 1)
 		return (0);
 	if (init_thread_tab(&info) != 1)
