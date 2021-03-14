@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:20:39 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 16:20:42 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 21:59:01 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct		s_philo
 {
 	int				pid;
+	int				id;
 	int				r_turn;
 	int				nbr;
 	long			life;
@@ -59,7 +60,7 @@ typedef struct		s_info
 /*
 ** init.c
 */
-int					lauch_philo(t_info *info, int i);
+void				lauch_philo(t_info *info, int i);
 void				init_philo_param(t_info *info, t_philo *philo);
 int					init_thread_tab(t_info *info);
 
@@ -81,7 +82,7 @@ void				philo_eat(t_philo *philo);
 ** philo_routine.c
 */
 int					recover_args(char **av);
-void				test(void *tmp);
+int					test(t_philo *philo);
 
 /*
 ** utils.c

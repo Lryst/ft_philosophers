@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 15:59:45 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 21:50:45 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		philo_die(t_info *info, int i)
 		info->philo[i++].start = 0;
 	}
 	sem_post(info->totem);
-	return (0);
+	return (1);
 }
 
 int		monitor(t_info *info)
