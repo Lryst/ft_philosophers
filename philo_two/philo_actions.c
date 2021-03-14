@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 13:58:54 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:55:52 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	philo_eat(t_philo *philo)
 		(get_time() - philo->top), philo->i);
 		printf("%ldms %d is eating\n", (get_time() - philo->top), philo->i);
 		philo->r_turn += 1;
-		
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
 		while ((get_time() - philo->l_chrono) <= philo->eat)

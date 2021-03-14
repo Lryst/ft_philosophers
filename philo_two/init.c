@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 14:12:39 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 15:04:55 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int		init_thread_tab(t_info *info)
 	sem_unlink("/eat");
 	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
-	if ((info->sem = sem_open("/eat", O_CREAT, S_IRWXU, info->arg1 / 2)) == SEM_FAILED)
+	if ((info->sem = sem_open("/eat", O_CREAT, S_IRWXU, info->arg1 / 2))
+		== SEM_FAILED)
 		return (0);
 	if (lauch_philo(info, 0) == 0)
 		return (0);

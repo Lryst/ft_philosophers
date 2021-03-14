@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 14:23:59 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:52:21 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		monitor_check_count_meal(t_info *info)
 int		philo_die(t_info *info, int i)
 {
 	pthread_mutex_t	mutex;
-	
+
 	pthread_mutex_init(&mutex, NULL);
 	pthread_mutex_lock(&mutex);
 	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i);

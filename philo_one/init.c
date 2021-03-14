@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 14:14:11 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:58:37 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,23 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	init_fork(info, philo);
 }
 
+int		lauch_philo(t_info *info, int i)
+{
+	info->i = i;
+	while (info->i < info->arg1)
+	{
+		init_philo_param(info, &info->philo[info->i]);
+		if (pthread_create(&info->philo[info->i].thread, NULL,
+			(void*)test, &info->philo[info->i]) != 0)
+		{
+			write(1, "pair GameOver\n", 14);
+			return (0);
+		}
+		info->i += 2;
+	}
+	return (1);
+}
+
 int		init_thread_tab(t_info *info)
 {
 	long	chrono;
@@ -69,36 +86,11 @@ int		init_thread_tab(t_info *info)
 	info->i = 0;
 	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
-	while (info->i < info->arg1)
-	{
-		info->philo[info->i].r_turn = 0;
-		info->i++;
-	}
-	info->i = 0;
-	while (info->i < info->arg1)
-	{
-		init_philo_param(info, &info->philo[info->i]);
-		if (pthread_create(&info->philo[info->i].thread, NULL,
-			(void*)test, &info->philo[info->i]) != 0)
-		{
-			write(1, "pair GameOver\n", 14);
-			return (0);
-		}
-		info->i += 2;
-	}
+	if (lauch_philo(info, 0) == 0)
+		return (0);
 	usleep(2);
-	info->i = 1;
-	while (info->i < info->arg1)
-	{
-		init_philo_param(info, &info->philo[info->i]);
-		if (pthread_create(&info->philo[info->i].thread, NULL,
-			(void*)test, &info->philo[info->i]) != 0)
-		{
-			write(1, "pair GameOver\n", 14);
-			return (0);
-		}
-		info->i += 2;
-	}
+	if (lauch_philo(info, 1) == 0)
+		return (0);
 	monitor(info);
 	return (1);
 }

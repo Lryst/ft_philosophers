@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 13:54:53 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/14 14:59:14 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	test(void *tmp)
 
 int		register_arg(char **av, t_info *info)
 {
-	if (info->arg1 == -1 ||	info->arg2 == -1 ||
-		info->arg3 == -1 ||	info->arg4 == -1)
+	if (info->arg1 == -1 || info->arg2 == -1 ||
+		info->arg3 == -1 || info->arg4 == -1)
 		return (0);
 	if (av[5])
 	{
