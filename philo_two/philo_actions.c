@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 11:55:20 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/15 14:49:32 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_think(t_philo *philo)
 {
-	while (philo->status == 3)
+	while (philo->start == 1 && philo->status == 3)
 	{
 		sem_wait(philo->totem);
 		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
@@ -27,7 +27,7 @@ void	philo_sleep(t_philo *philo)
 {
 	long	chrono;
 
-	while (philo->status == 2)
+	while (philo->start == 1 && philo->status == 2)
 	{
 		chrono = get_time();
 		sem_wait(philo->totem);
@@ -41,7 +41,7 @@ void	philo_sleep(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	while (philo->status == 1 && philo->turn != 1)
+	while (philo->start == 1 && philo->status == 1 && philo->turn != 1)
 	{
 		sem_wait(philo->sem);
 		sem_wait(philo->totem);
