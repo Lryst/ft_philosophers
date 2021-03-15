@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 14:55:04 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/15 15:06:11 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,15 @@ int		philo_die(t_info *info, int i)
 	sem_wait(info->totem);
 	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i);
 	i = 0;
-	sem_post(info->sem);
-	sem_close(info->totem);
-	sem_unlink("/totem");
 	while (i < info->arg1)
 	{
 		//sem_post(info->sem);
 		info->philo[i++].start = 0;
 	}
+	usleep(10);
+	sem_post(info->sem);
+	sem_close(info->totem);
+	sem_unlink("/totem");
 	sem_post(info->totem);
 	sem_close(info->sem);
 	sem_unlink("/eat");
