@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:52:52 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 15:04:13 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/15 11:53:08 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_philo
 	int				status;
 	int				nbr_turn;
 	sem_t			*sem;
+	sem_t			*totem;
 }					t_philo;
 
 typedef struct		s_info

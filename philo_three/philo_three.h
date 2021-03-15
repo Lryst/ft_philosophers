@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:20:39 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 21:59:01 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/15 14:31:23 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef PHILO_THREE_H
 # define PHILO_THREE_H
 # include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
@@ -21,6 +22,8 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct		s_philo
 {

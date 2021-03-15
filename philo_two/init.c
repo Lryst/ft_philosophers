@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 15:04:55 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/15 11:55:43 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	philo->start = 1;
 	philo->r_turn = 0;
 	philo->sem = info->sem;
+	philo->totem = info->totem;
 }
 
 int		lauch_philo(t_info *info, int i)
@@ -45,9 +46,13 @@ int		lauch_philo(t_info *info, int i)
 
 int		init_thread_tab(t_info *info)
 {
+	sem_close(info->totem);
+	sem_unlink("/totem");
 	info->i = 0;
 	sem_close(info->sem);
 	sem_unlink("/eat");
+	if ((info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)) == SEM_FAILED)
+		return (0);
 	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
 	if ((info->sem = sem_open("/eat", O_CREAT, S_IRWXU, info->arg1 / 2))
