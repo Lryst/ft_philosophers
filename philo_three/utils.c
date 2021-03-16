@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/16 13:05:50 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/16 16:14:54 by luciole          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void		monitor(void *tmp)
 		{
 			philo->start = 1;
 			sem_wait(philo->totem);
+			int i = 0;
 			printf("%ldms %d die\n", (get_time() - philo->top), i);
 			break ;
 		}
 	}
-	return (NULL);
 }

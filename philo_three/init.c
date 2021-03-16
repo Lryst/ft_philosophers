@@ -59,12 +59,12 @@ static void	proc_philo(t_info *info, int k, int status)
 	{
 		if (waitpid(-1, &status, 0) == -1)
 			write(1, "Waitpid failed\n", 15);
-		if (WEXITSTATUS)
+		if (WEXITSTATUS(status))
 		{
-			if (WEXITSTATUS == 1)
+			if (WEXITSTATUS(status) == 1)
 				if (++i == info->arg1)
 					printf("All the philosophers ate %d times\n", info->arg5);
-			if (WEXITSTATUS == 0)
+			if (WEXITSTATUS(status) == 0)
 			{
 				k = -1;
 				while (++k < info->arg1)
@@ -78,9 +78,7 @@ static void	proc_philo(t_info *info, int k, int status)
 }
 
 int			init_thread_tab(t_info *info)
-{
-	int i;
-	
+{	
 	info->i = 0;
 	info->top_chrono = get_time();
 	sem_unlink("/fork");
@@ -99,9 +97,9 @@ int			init_thread_tab(t_info *info)
 		info->philo[info->i].id = fork();
 		if (info->philo[info->i].id == 0)
 		{
-			lauch_philo(&info->philo[i]);
-			info->start = info->philo[i].start;
-			if (info->philo[i].start)
+			lauch_philo(&info->philo[info->i]);
+			info->start = info->philo[info->i].start;
+			if (info->philo[info->i].start)
 				exit (0);
 			exit (1);
 		}
@@ -113,9 +111,3 @@ int			init_thread_tab(t_info *info)
 	sem_unlink("/totem");
 	return (1);
 }
-
-
-/* fork
-create thread ->
-*/
-

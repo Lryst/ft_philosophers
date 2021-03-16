@@ -65,8 +65,8 @@ typedef struct		s_info
 /*
 ** init.c
 */
-void				lauch_philo(t_philo *philo);
 void				init_philo_param(t_info *info, t_philo *philo);
+void				lauch_philo(t_philo *philo);
 int					init_thread_tab(t_info *info);
 
 /*
@@ -86,8 +86,8 @@ int					philo_eat(t_philo *philo);
 /*
 ** philo_routine.c
 */
-int					recover_args(char **av);
 int					test(t_philo *philo);
+int					recover_args(char **av);
 
 /*
 ** utils.c
