@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:20:39 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 14:31:23 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/16 13:11:55 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 typedef struct		s_philo
 {
@@ -55,6 +56,7 @@ typedef struct		s_info
 	int				arg5;
 	int				i;
 	long			top_chrono;
+	int				start;
 	sem_t			*sem;
 	sem_t			*totem;
 	t_philo			*philo;
@@ -63,7 +65,7 @@ typedef struct		s_info
 /*
 ** init.c
 */
-void				lauch_philo(t_info *info, int i);
+void				lauch_philo(t_philo *philo);
 void				init_philo_param(t_info *info, t_philo *philo);
 int					init_thread_tab(t_info *info);
 
@@ -77,9 +79,9 @@ int					main(int ac, char **av);
 /*
 ** philo_actions.c
 */
-void				philo_think(t_philo *philo);
-void				philo_sleep(t_philo *philo);
-void				philo_eat(t_philo *philo);
+int					philo_think(t_philo *philo);
+int					philo_sleep(t_philo *philo);
+int					philo_eat(t_philo *philo);
 
 /*
 ** philo_routine.c
@@ -94,6 +96,6 @@ long				get_time(void);
 int					ft_atoi_lite(char *str);
 int					monitor_check_count_meal(t_info *info);
 int					philo_die(t_info *info, int i);
-int					monitor(t_info *info);
+void				monitor(void *tmp);
 
 #endif

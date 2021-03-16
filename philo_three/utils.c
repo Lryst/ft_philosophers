@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 21:50:45 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/16 13:05:50 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_atoi_lite(char *str)
 	return (nbr);
 }
 
-int		monitor_check_count_meal(t_info *info)
+/* int		monitor_check_count_meal(t_info *info)
 {
 	int i;
 
@@ -53,9 +53,9 @@ int		monitor_check_count_meal(t_info *info)
 	if (i == info->arg1)
 		return (1);
 	return (0);
-}
+} */
 
-int		philo_die(t_info *info, int i)
+/* int		philo_die(t_info *info, int i)
 {
 	sem_close(info->totem);
 	sem_unlink("/totem");
@@ -71,25 +71,25 @@ int		philo_die(t_info *info, int i)
 	}
 	sem_post(info->totem);
 	return (1);
-}
+} */
 
-int		monitor(t_info *info)
+void		monitor(void *tmp)
 {
-	int		i;
+	t_philo *philo;
 
+	philo = (t_philo*)tmp;
 	while (1)
 	{
-		i = 0;
-		while (i < info->arg1)
+		usleep(7);
+		if (philo->nbr_turn == 1)
+			break ;
+		if ((get_time() - (philo->l_chrono)) > philo->life)
 		{
-			if (info->philo[i].nbr_turn == 1)
-				if (monitor_check_count_meal(info) == 1)
-					return (1);
-			usleep(7);
-			if ((get_time() - (info->philo[i].l_chrono)) > info->philo[i].life)
-				return (philo_die(info, i));
-			i++;
+			philo->start = 1;
+			sem_wait(philo->totem);
+			printf("%ldms %d die\n", (get_time() - philo->top), i);
+			break ;
 		}
 	}
-	return (1);
+	return (NULL);
 }

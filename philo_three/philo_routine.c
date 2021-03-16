@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 21:55:21 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/16 11:25:48 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		test(t_philo *philo)
 {
 	philo->status = 1;
-	philo->top = get_time();
 	philo->nbr_turn = 0;
 	philo->l_chrono = get_time();
 	while (philo->start == 1)
