@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 21:20:15 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 10:57:07 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	philo_sleep(t_philo *philo)
 void	philo_eat(t_philo *philo)
 {
 	sem_wait(philo->sem);
-	if (philo->start == 1 && philo->status == 1 && philo->turn != 1)
+	if (philo->start == 1 && philo->status == 1 && philo->nbr_turn != 1)
 	{
 		philo->l_chrono = get_time();
 		printf("%ldms %d has taken a fork\n",

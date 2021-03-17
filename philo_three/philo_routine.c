@@ -6,26 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/16 11:25:48 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 12:16:05 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_three.h"
-
-int		test(t_philo *philo)
-{
-	philo->status = 1;
-	philo->nbr_turn = 0;
-	philo->l_chrono = get_time();
-	while (philo->start == 1)
-	{
-		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
-	}
-	sem_post(philo->sem);
-	return (0);
-}
+#include "philo_three.h" 
 
 int		register_arg(char **av, t_info *info)
 {

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/16 16:14:54 by luciole          ###   ########.fr       */
+/*   Updated: 2021/03/17 12:04:43 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,36 +43,6 @@ int		ft_atoi_lite(char *str)
 	return (nbr);
 }
 
-/* int		monitor_check_count_meal(t_info *info)
-{
-	int i;
-
-	i = 0;
-	while (i < info->arg1 && info->philo[i].nbr_turn == 1)
-		i++;
-	if (i == info->arg1)
-		return (1);
-	return (0);
-} */
-
-/* int		philo_die(t_info *info, int i)
-{
-	sem_close(info->totem);
-	sem_unlink("/totem");
-	if ((info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)) == SEM_FAILED)
-		return (0);
-	sem_wait(info->totem);
-	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i);
-	i = 0;
-	while (i < info->arg1)
-	{
-		sem_post(info->sem);
-		info->philo[i++].start = 0;
-	}
-	sem_post(info->totem);
-	return (1);
-} */
-
 void		monitor(void *tmp)
 {
 	t_philo *philo;
@@ -80,15 +50,14 @@ void		monitor(void *tmp)
 	philo = (t_philo*)tmp;
 	while (1)
 	{
-		usleep(7);
+		usleep(20);
 		if (philo->nbr_turn == 1)
 			break ;
-		if ((get_time() - (philo->l_chrono)) > philo->life)
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
 		{
 			philo->start = 1;
 			sem_wait(philo->totem);
-			int i = 0;
-			printf("%ldms %d die\n", (get_time() - philo->top), i);
+			printf("%ldms %d die\n", (get_time() - philo->top), philo->i);
 			break ;
 		}
 	}

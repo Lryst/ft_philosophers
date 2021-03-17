@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 11:43:59 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 10:38:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	philo_eat(t_philo *philo)
 {
 	while (philo->mutex_r->latest != philo->i &&
 		philo->mutex_l->latest != philo->i && philo->status == 1 &&
-		philo->turn != 1)
+		philo->nbr_turn != 1)
 	{
 		take_fork(philo);
 		philo->l_chrono = get_time();

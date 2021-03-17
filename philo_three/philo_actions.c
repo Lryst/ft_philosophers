@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/16 12:35:35 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 11:36:17 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int		philo_think(t_philo *philo)
 {
-	while (philo->status == 3)
+	if (philo->status == 3)
 	{
+		sem_wait(philo->totem);
 		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
+		sem_post(philo->totem);
 		philo->status = 1;
 	}
 	return (0);
@@ -26,10 +28,13 @@ int		philo_sleep(t_philo *philo)
 {
 	long	chrono;
 
-	while (philo->status == 2)
+	if (philo->status == 2)
 	{
 		chrono = get_time();
+		
+		sem_wait(philo->totem);
 		printf("%ldms %d is sleeping\n", (get_time() - philo->top), philo->i);
+		sem_post(philo->totem);
 		while ((get_time() - chrono) <= philo->sleep)
 			;
 		philo->status = 3;
@@ -40,21 +45,25 @@ int		philo_sleep(t_philo *philo)
 int		philo_eat(t_philo *philo)
 {
 	sem_wait(philo->sem);
-	while (philo->status == 1 && philo->turn != 1)
+	//printf("hello\n");
+	//printf("philo->status = %d | philo->nbr_turn = %d\n", philo->status, philo->nbr_turn);
+	//printf("philo->i = %d\n", philo->i);
+	if (philo->status == 1 && philo->nbr_turn != 1)
 	{
-		//sem_wait(philo->sem);
+		//printf("hello\n");
+		sem_wait(philo->totem);
 		philo->l_chrono = get_time();
 		printf("%ldms %d has taken a fork\n",
 		(get_time() - philo->top), philo->i);
 		printf("%ldms %d has taken a fork\n",
 		(get_time() - philo->top), philo->i);
 		printf("%ldms %d is eating\n", (get_time() - philo->top), philo->i);
+		sem_post(philo->totem);
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
 		while ((get_time() - philo->l_chrono) <= philo->eat)
 			;
-		//sem_post(philo->sem);
 		philo->status = 2;
 	}
 	sem_post(philo->sem);

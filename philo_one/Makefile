@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 19:10:00 by lryst             #+#    #+#              #
-#    Updated: 2021/03/09 08:32:42 by lryst            ###   ########.fr        #
+#    Updated: 2021/03/16 13:12:32 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = philo_one
 #HEAD := -I./includes/ -I./libft/includes
 HEAD := -I./includes/
 
-CFLAGS = -Wall -Wextra -Werror
-CFLAGSF = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -phtread
+CFLAGSF = -g3 -fsanitize=address -Wall -Wextra -Werror -pthread
 
 
 SRC := \
