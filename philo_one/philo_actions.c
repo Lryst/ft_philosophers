@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 10:38:58 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 12:20:12 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	philo_think(t_philo *philo)
 	while (philo->status == 3)
 	{
 		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
+		usleep(50);
 		philo->status = 1;
 	}
 }
