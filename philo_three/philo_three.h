@@ -92,6 +92,7 @@ int					recover_args(char **av);
 /*
 ** utils.c
 */
+void				print(long	time, int index, char *str, sem_t *sem);
 long				get_time(void);
 int					ft_atoi_lite(char *str);
 int					monitor_check_count_meal(t_info *info);

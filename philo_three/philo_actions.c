@@ -16,9 +16,7 @@ int		philo_think(t_philo *philo)
 {
 	if (philo->status == 3)
 	{
-		sem_wait(philo->totem);
-		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
-		sem_post(philo->totem);
+		print((get_time() - philo->top), philo->i, "is thinking", philo->totem);
 		philo->status = 1;
 	}
 	return (0);
@@ -31,10 +29,7 @@ int		philo_sleep(t_philo *philo)
 	if (philo->status == 2)
 	{
 		chrono = get_time();
-		
-		sem_wait(philo->totem);
-		printf("%ldms %d is sleeping\n", (get_time() - philo->top), philo->i);
-		sem_post(philo->totem);
+		print((get_time() - philo->top), philo->i, "is sleeping", philo->totem);
 		while ((get_time() - chrono) <= philo->sleep)
 			;
 		philo->status = 3;
@@ -45,20 +40,12 @@ int		philo_sleep(t_philo *philo)
 int		philo_eat(t_philo *philo)
 {
 	sem_wait(philo->sem);
-	//printf("hello\n");
-	//printf("philo->status = %d | philo->nbr_turn = %d\n", philo->status, philo->nbr_turn);
-	//printf("philo->i = %d\n", philo->i);
 	if (philo->status == 1 && philo->nbr_turn != 1)
 	{
-		//printf("hello\n");
-		sem_wait(philo->totem);
 		philo->l_chrono = get_time();
-		printf("%ldms %d has taken a fork\n",
-		(get_time() - philo->top), philo->i);
-		printf("%ldms %d has taken a fork\n",
-		(get_time() - philo->top), philo->i);
-		printf("%ldms %d is eating\n", (get_time() - philo->top), philo->i);
-		sem_post(philo->totem);
+		print((get_time() - philo->top), philo->i, "has taken a fork", philo->totem);
+		print((get_time() - philo->top), philo->i, "has taken a fork", philo->totem);
+		print((get_time() - philo->top), philo->i, "is eating", philo->totem);
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;

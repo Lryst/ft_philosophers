@@ -71,6 +71,7 @@ static void	proc_philo(t_info *info, int k, int status)
 					printf("All the philosophers ate %d times\n", info->arg5);
 			if (WEXITSTATUS(status) == 0)
 			{
+				printf("yoyo\n");
 				k = -1;
 				while (++k < info->arg1)
 					kill(info->philo[k].id, SIGINT);
@@ -97,7 +98,6 @@ int			init_thread_tab(t_info *info)
 	if ((info->sem = sem_open("/totem", O_CREAT, S_IRWXU, 1))
 		== SEM_FAILED)
 		return (0);
-	sem_post(info->totem);
 	while (info->i < info->arg1)
 	{
 		init_philo_param(info, &info->philo[info->i]);

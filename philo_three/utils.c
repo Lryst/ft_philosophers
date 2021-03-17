@@ -12,6 +12,13 @@
 
 #include "philo_three.h"
 
+void	print(long	time, int index, char *str, sem_t *sem)
+{
+	sem_wait(sem);
+	printf("%ldms %d %s\n", time, index, str);
+	sem_post(sem);
+}
+
 long	get_time(void)
 {
 	struct timeval	tmp_time;
@@ -56,8 +63,7 @@ void		monitor(void *tmp)
 		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
 		{
 			philo->start = 1;
-			sem_wait(philo->totem);
-			printf("%ldms %d die\n", (get_time() - philo->top), philo->i);
+			print((get_time() - philo->top), philo->i, "die", philo->totem);
 			break ;
 		}
 	}
