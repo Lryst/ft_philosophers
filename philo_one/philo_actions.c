@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 12:20:12 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 13:37:00 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	philo_think(t_philo *philo)
 {
-	while (philo->status == 3)
+	if (philo->status == 3)
 	{
 		printf("%ldms %d is thinking\n", (get_time() - philo->top), philo->i);
-		usleep(50);
 		philo->status = 1;
 	}
 }
@@ -26,12 +25,11 @@ void	philo_sleep(t_philo *philo)
 {
 	long	chrono;
 
-	while (philo->status == 2)
+	if (philo->status == 2)
 	{
 		chrono = get_time();
 		printf("%ldms %d is sleeping\n", (get_time() - philo->top), philo->i);
-		while ((get_time() - chrono) <= philo->sleep)
-			;
+		usleep(philo->sleep * 1000);
 		philo->status = 3;
 	}
 }
@@ -56,7 +54,7 @@ void	take_fork(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	while (philo->mutex_r->latest != philo->i &&
+	if (philo->mutex_r->latest != philo->i &&
 		philo->mutex_l->latest != philo->i && philo->status == 1 &&
 		philo->nbr_turn != 1)
 	{
@@ -70,8 +68,7 @@ void	philo_eat(t_philo *philo)
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
-		while ((get_time() - philo->l_chrono) <= philo->eat)
-			;
+		usleep(philo->eat * 1000);
 		pthread_mutex_unlock(&philo->mutex_l->mutex);
 		pthread_mutex_unlock(&philo->mutex_r->mutex);
 		philo->status = 2;
