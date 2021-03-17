@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 11:35:19 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/17 18:56:20 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@ void		init_philo_param(t_info *info, t_philo *philo)
 	philo->top = info->top_chrono;
 }
 
-void		lauch_philo(t_philo *philo)
+int			lauch_philo(t_philo *philo)
 {
 	pthread_t	thread;
 
 	if (pthread_create(&thread, NULL, (void*)monitor, philo) != 0)
-	{
-		write(1, "GameOver\n", 9);
-		return ;
-	}
+		return (write(1, "GameOver\n", 9));
 	//printf("philo->i = %d | philo->status = %d\n", philo->i, philo->status);
 	while (philo->start != 1 && philo->nbr_turn != 1)
 	{
@@ -50,9 +47,14 @@ void		lauch_philo(t_philo *philo)
 		if (philo->start == 1 || philo->nbr_turn == 1 || philo_think(philo) == 1)
 			break ;
 	}
+	if (philo->start == 1)
+		return (0);
+	if (philo->nbr_turn == 1)
+		return (1);
 	pthread_join(thread, NULL);
 	sem_close(philo->totem);
 	sem_close(philo->sem);
+	return (-1);
 }
 
 static void	proc_philo(t_info *info, int k, int status)
@@ -71,7 +73,6 @@ static void	proc_philo(t_info *info, int k, int status)
 					printf("All the philosophers ate %d times\n", info->arg5);
 			if (WEXITSTATUS(status) == 0)
 			{
-				printf("yoyo\n");
 				k = -1;
 				while (++k < info->arg1)
 					kill(info->philo[k].id, SIGINT);
@@ -86,6 +87,7 @@ static void	proc_philo(t_info *info, int k, int status)
 
 int			init_thread_tab(t_info *info)
 {	
+	int ret;
 	info->i = 0;
 	info->top_chrono = get_time();
 	sem_unlink("/fork");
@@ -104,10 +106,11 @@ int			init_thread_tab(t_info *info)
 		info->philo[info->i].id = fork();
 		if (info->philo[info->i].id == 0)
 		{
-			lauch_philo(&info->philo[info->i]);
-			if (info->philo[info->i].start)
+			ret = lauch_philo(&info->philo[info->i]);
+			if (ret == 0)
 				exit (0);
-			exit (1);
+			if (ret == 1)
+				exit (1);
 		}
 		info->i++;
 	}
