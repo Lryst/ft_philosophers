@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 18:37:02 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/18 15:29:12 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ int		philo_think(t_philo *philo)
 {
 	if (philo->status == 3)
 	{
-		print((get_time() - philo->top), philo->i, "is thinking", philo->totem);
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		{
+			philo->start = 1;
+			return (1);
+		}
+		print((get_time() - philo->top), "is thinking", philo);
 		philo->status = 1;
-		//usleep(50);
 	}
 	return (0);
 }
@@ -29,10 +33,13 @@ int		philo_sleep(t_philo *philo)
 
 	if (philo->status == 2)
 	{
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		{
+			philo->start = 1;
+			return (1);
+		}
 		chrono = get_time();
-		print((get_time() - philo->top), philo->i, "is sleeping", philo->totem);
-		/* while ((get_time() - chrono) <= philo->sleep)
-			; */
+		print((get_time() - philo->top), "is sleeping", philo);
 		usleep(philo->sleep * 1000);
 		philo->status = 3;
 	}
@@ -41,21 +48,24 @@ int		philo_sleep(t_philo *philo)
 
 int		philo_eat(t_philo *philo)
 {
-	sem_wait(philo->sem);
+	sem_wait(*philo->sem);
 	if (philo->status == 1 && philo->nbr_turn != 1)
 	{
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		{
+			philo->start = 1;
+			return (1);
+		}
 		philo->l_chrono = get_time();
-		print((get_time() - philo->top), philo->i, "has taken a fork", philo->totem);
-		print((get_time() - philo->top), philo->i, "has taken a fork", philo->totem);
-		print((get_time() - philo->top), philo->i, "is eating", philo->totem);
+		print((get_time() - philo->top), "has taken a fork", philo);
+		print((get_time() - philo->top), "has taken a fork", philo);
+		print((get_time() - philo->top), "is eating", philo);
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
-		/* while ((get_time() - philo->l_chrono) <= philo->eat)
-			; */
 		usleep(philo->eat * 1000);
 		philo->status = 2;
 	}
-	sem_post(philo->sem);
+	sem_post(*philo->sem);
 	return (0);
 }

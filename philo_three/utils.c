@@ -6,17 +6,17 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 19:02:08 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/18 13:46:16 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	print(long	time, int index, char *str, sem_t *sem)
+void	print(long	time, char *str, t_philo *philo)
 {
-	sem_wait(sem);
-	printf("%ldms %d %s\n", time, index, str);
-	sem_post(sem);
+	sem_wait(*philo->totem);
+	printf("%ldms %d %s\n", time, philo->i, str);
+	sem_post(*philo->totem);
 }
 
 long	get_time(void)
@@ -63,9 +63,8 @@ void		monitor(void *tmp)
 		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
 		{
 			philo->start = 1;
-			//sem_wait(philo->totem);
-			print((get_time() - philo->top), philo->i, "die", philo->totem);
-			sem_wait(philo->totem);
+			sem_wait(*philo->totem);
+			printf("%ldms %d died\n", (get_time() - philo->top), philo->i);
 			break ;
 		}
 	}
