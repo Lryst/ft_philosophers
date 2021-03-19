@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/18 15:29:12 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 14:03:08 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		philo_think(t_philo *philo)
 {
 	if (philo->status == 3)
 	{
-		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
 		{
 			philo->start = 1;
 			return (1);
@@ -33,7 +34,8 @@ int		philo_sleep(t_philo *philo)
 
 	if (philo->status == 2)
 	{
-		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
 		{
 			philo->start = 1;
 			return (1);
@@ -51,7 +53,8 @@ int		philo_eat(t_philo *philo)
 	sem_wait(*philo->sem);
 	if (philo->status == 1 && philo->nbr_turn != 1)
 	{
-		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
 		{
 			philo->start = 1;
 			return (1);

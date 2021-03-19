@@ -6,16 +6,16 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/18 13:46:16 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 14:09:13 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	print(long	time, char *str, t_philo *philo)
+void	print(long time, char *str, t_philo *philo)
 {
 	sem_wait(*philo->totem);
-	printf("%ldms %d %s\n", time, philo->i, str);
+	printf("%ldms %d %s\n", time, philo->i + 1, str);
 	sem_post(*philo->totem);
 }
 
@@ -50,7 +50,7 @@ int		ft_atoi_lite(char *str)
 	return (nbr);
 }
 
-void		monitor(void *tmp)
+void	monitor(void *tmp)
 {
 	t_philo *philo;
 
@@ -60,11 +60,12 @@ void		monitor(void *tmp)
 		usleep(20);
 		if (philo->nbr_turn == 1)
 			break ;
-		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) > philo->life)
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
 		{
 			philo->start = 1;
 			sem_wait(*philo->totem);
-			printf("%ldms %d died\n", (get_time() - philo->top), philo->i);
+			printf("%ldms %d died\n", (get_time() - philo->top), philo->i + 1);
 			break ;
 		}
 	}

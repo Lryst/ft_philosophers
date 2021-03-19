@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 12:16:05 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 14:01:17 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_three.h" 
+#include "philo_three.h"
 
 int		register_arg(char **av, t_info *info)
 {

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 13:31:38 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 14:04:37 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ void		lauch_philo(t_philo *philo)
 	}
 	while (philo->start != 1 && philo->nbr_turn != 1)
 	{
-		if (philo->start == 1 || philo->nbr_turn == 1 || philo_eat(philo) == 1)
+		if (philo->start == 1 || philo->nbr_turn == 1 ||
+			philo_eat(philo) == 1)
 			break ;
-		if (philo->start == 1 || philo->nbr_turn == 1 || philo_sleep(philo) == 1)
+		if (philo->start == 1 || philo->nbr_turn == 1 ||
+			philo_sleep(philo) == 1)
 			break ;
-		if (philo->start == 1 || philo->nbr_turn == 1 || philo_think(philo) == 1)
+		if (philo->start == 1 || philo->nbr_turn == 1 ||
+			philo_think(philo) == 1)
 			break ;
 	}
 	pthread_join(thread, NULL);
@@ -88,7 +91,8 @@ static int	init_semaphore(t_info *info)
 	sem_unlink("/fork");
 	sem_unlink("/totem");
 	memset(&info->sem, 0, sizeof(info->sem));
-	if (SEM_FAILED == (info->sem = sem_open("/fork", O_CREAT, S_IRWXU, info->arg1 / 2)))
+	if (SEM_FAILED == (info->sem = sem_open("/fork", O_CREAT, S_IRWXU,
+		info->arg1 / 2)))
 		return (0);
 	memset(&info->totem, 0, sizeof(info->totem));
 	if (SEM_FAILED == (info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)))
@@ -110,8 +114,8 @@ int			init_thread_tab(t_info *info)
 		{
 			lauch_philo(&info->philo[info->i]);
 			if (info->philo[info->i].start)
-				exit (0);
-			exit (1);
+				exit(0);
+			exit(1);
 		}
 		info->i++;
 	}
