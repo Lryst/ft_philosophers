@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/15 14:54:58 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 13:56:51 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,5 @@ int		init_thread_tab(t_info *info)
 	if (lauch_philo(info, 1) == 0)
 		return (0);
 	monitor(info);
-	/* sem_close(info->sem);
-	sem_unlink("/eat"); */
-	/* sem_close(info->totem);
-	sem_unlink("/totem"); */
 	return (1);
 }
