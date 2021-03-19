@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/18 15:51:52 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 13:31:38 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	proc_philo(t_info *info, int u, int status)
 	int i;
 
 	i = 0;
-	while (!info->philo[u].start && ++u < info->arg1)
+	while (info->philo[u].start != 1 && ++u < info->arg1)
 	{
 		if (waitpid(-1, &status, 0) < 0)
 			write(1, "Waitpid failed\n", 15);
