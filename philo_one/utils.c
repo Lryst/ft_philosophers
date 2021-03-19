@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/17 13:43:07 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/19 13:49:04 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,13 @@ int		monitor(t_info *info)
 		while (i < info->arg1)
 		{
 			if (info->philo[i].nbr_turn == 1)
+			{
 				if (monitor_check_count_meal(info) == 1)
+				{
+					printf("All the philosophers ate %d times\n", info->arg5);
 					return (1);
+				}
+			}
 			usleep(7);
 			if ((get_time() - (info->philo[i].l_chrono)) > info->philo[i].life)
 				return (philo_die(info, i));
