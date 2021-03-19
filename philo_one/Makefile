@@ -15,7 +15,7 @@ NAME = philo_one
 HEAD := -I./includes/
 
 CFLAGS = -Wall -Wextra -Werror -pthread
-CFLAGSF = -g3 -fsanitize=address -Wall -Wextra -Werror -pthread
+CFLAGSF = -g3 -Wall -Wextra -Werror -pthread
 
 
 SRC := \

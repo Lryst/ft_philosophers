@@ -67,6 +67,11 @@ int		philo_die(t_info *info, int i)
 		info->philo[i++].start = 0;
 	pthread_mutex_unlock(&mutex);
 	usleep(10);
+	i = 0;
+	while (i < info->arg1)
+		pthread_mutex_destroy(&info->mutex_tab[i++].mutex);
+	pthread_mutex_destroy(&mutex);
+	free(info->philo);
 	return (0);
 }
 

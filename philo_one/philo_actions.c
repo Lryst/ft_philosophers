@@ -24,11 +24,8 @@ void	philo_think(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	long	chrono;
-
 	if (philo->status == 2)
 	{
-		chrono = get_time();
 		printf("%ldms %d is sleeping\n", (get_time() - philo->top),
 		philo->i + 1);
 		usleep(philo->sleep * 1000);

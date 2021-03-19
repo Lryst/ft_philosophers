@@ -80,9 +80,6 @@ int		lauch_philo(t_info *info, int i)
 
 int		init_thread_tab(t_info *info)
 {
-	long	chrono;
-
-	chrono = get_time();
 	info->i = 0;
 	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
