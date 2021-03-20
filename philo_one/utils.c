@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 13:52:36 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/20 20:56:49 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,18 @@ int		monitor_check_count_meal(t_info *info)
 
 int		philo_die(t_info *info, int i)
 {
-	pthread_mutex_t	mutex;
-
-	pthread_mutex_init(&mutex, NULL);
-	pthread_mutex_lock(&mutex);
+	pthread_mutex_lock(&info->totem);
 	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i + 1);
 	i = 0;
 	while (i < info->arg1)
 		info->philo[i++].start = 0;
-	pthread_mutex_unlock(&mutex);
 	usleep(10);
 	i = 0;
 	while (i < info->arg1)
 		pthread_mutex_destroy(&info->mutex_tab[i++].mutex);
-	pthread_mutex_destroy(&mutex);
+	pthread_mutex_destroy(&info->totem);
 	free(info->philo);
+	free(info->mutex_tab);
 	return (0);
 }
 

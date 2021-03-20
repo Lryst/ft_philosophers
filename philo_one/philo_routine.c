@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 14:03:46 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/20 20:48:07 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		register_arg(char **av, t_info *info)
 		return (0);
 	if ((init_mutex_tab(info)) == 0)
 		return (0);
+	pthread_mutex_init(&info->totem, NULL);
 	info->i = 0;
 	return (1);
 }

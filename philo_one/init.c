@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 13:40:39 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/20 20:49:01 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	philo->i = info->i;
 	philo->start = 1;
 	philo->r_turn = 0;
+	philo->totem = &info->totem;
 	init_fork(info, philo);
 }
 
