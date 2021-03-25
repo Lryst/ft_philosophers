@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/25 08:26:16 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/25 12:34:12 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int		philo_think(t_philo *philo)
 {
 	if (philo->status == 3)
 	{
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
+		{
+			philo->start = 0;
+			return (1);
+		}
 		print((get_time() - philo->top), "is thinking", philo);
 		philo->status = 1;
 	}
@@ -36,6 +42,12 @@ int		philo_sleep(t_philo *philo)
 	if (philo->status == 2)
 	{
 		chrono = get_time();
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
+		{
+			philo->start = 0;
+			return (1);
+		}
 		print((get_time() - philo->top), "is sleeping", philo);
 		while ((get_time() - chrono) < philo->sleep)
 			usleep(10);
@@ -49,6 +61,12 @@ int		philo_eat(t_philo *philo)
 	sem_wait(*philo->sem);
 	if (philo->status == 1 && philo->nbr_turn != 1)
 	{
+		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
+			philo->life)
+		{
+			philo->start = 0;
+			return (1);
+		}
 		philo->l_chrono = get_time();
 		print((get_time() - philo->top), "has taken a fork", philo);
 		print((get_time() - philo->top), "has taken a fork", philo);

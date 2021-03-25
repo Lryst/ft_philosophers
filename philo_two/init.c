@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/22 20:33:07 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/25 12:31:44 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	philo->r_turn = 0;
 	philo->sem = &info->sem;
 	philo->totem = &info->totem;
-	philo->top = info->top_chrono;
 	philo->l_chrono = get_time();
+	philo->top = info->top_chrono;
 }
 
 int		lauch_philo(t_info *info, int i)
@@ -43,6 +43,7 @@ int		lauch_philo(t_info *info, int i)
 		}
 		info->i += 2;
 	}
+	//sem_close(info->totem);
 	return (1);
 }
 
@@ -50,13 +51,12 @@ int		init_thread_tab(t_info *info)
 {
 	sem_close(info->totem);
 	sem_unlink("/totem");
+	info->i = 0;
 	sem_close(info->sem);
 	sem_unlink("/eat");
-	info->i = 0;
-	info->top_chrono = get_time();
-	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
-		return (0);
 	if ((info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)) == SEM_FAILED)
+		return (0);
+	if (!(info->philo = (t_philo*)malloc(sizeof(t_philo) * info->arg1)))
 		return (0);
 	if ((info->sem = sem_open("/eat", O_CREAT, S_IRWXU, info->arg1 / 2))
 		== SEM_FAILED)

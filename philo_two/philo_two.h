@@ -13,7 +13,6 @@
 #ifndef PHILO_TWO_H
 # define PHILO_TWO_H
 # include <stdio.h>
-# include <string.h>
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
