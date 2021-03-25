@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 19:10:00 by lryst             #+#    #+#              #
-#    Updated: 2021/03/16 16:21:18 by luciole          ###   ########.fr        #
+#    Updated: 2021/03/22 20:08:03 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo_three
 #HEAD := -I./includes/ -I./libft/includes
 HEAD := -I .
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 CFLAGSF = -g3 -fsanitize=address  -Wall -Wextra -Werror
 
 

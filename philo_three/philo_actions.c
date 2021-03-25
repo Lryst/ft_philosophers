@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 14:03:08 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/25 08:26:54 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		philo_sleep(t_philo *philo)
 {
 	long	chrono;
 
+	chrono = get_time();
 	if (philo->status == 2)
 	{
 		if (philo->nbr_turn != 1 && (get_time() - (philo->l_chrono)) >
@@ -40,9 +41,9 @@ int		philo_sleep(t_philo *philo)
 			philo->start = 1;
 			return (1);
 		}
-		chrono = get_time();
 		print((get_time() - philo->top), "is sleeping", philo);
-		usleep(philo->sleep * 1000);
+		while ((get_time() - chrono) < philo->sleep)
+			usleep(10);
 		philo->status = 3;
 	}
 	return (0);
@@ -66,7 +67,8 @@ int		philo_eat(t_philo *philo)
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
-		usleep(philo->eat * 1000);
+		while ((get_time() - philo->l_chrono) < philo->eat)
+			usleep(10);
 		philo->status = 2;
 	}
 	sem_post(*philo->sem);

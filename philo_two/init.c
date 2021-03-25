@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:49:20 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 13:56:51 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/22 20:33:07 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	philo->i = info->i;
 	philo->start = 1;
 	philo->r_turn = 0;
-	philo->sem = info->sem;
-	philo->totem = info->totem;
+	philo->sem = &info->sem;
+	philo->totem = &info->totem;
 }
 
 int		lauch_philo(t_info *info, int i)
@@ -41,6 +41,7 @@ int		lauch_philo(t_info *info, int i)
 		}
 		info->i += 2;
 	}
+	sem_close(info->totem);
 	return (1);
 }
 

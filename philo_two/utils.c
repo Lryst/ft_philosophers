@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:59 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/19 13:55:04 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/22 20:37:02 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int		philo_die(t_info *info, int i)
 	i = 0;
 	while (i < info->arg1)
 		info->philo[i++].start = 0;
-	usleep(10);
-	sem_post(info->sem);
+	usleep(20);
 	sem_close(info->totem);
 	sem_unlink("/totem");
 	sem_post(info->totem);
@@ -93,7 +92,7 @@ int		monitor(t_info *info)
 					return (1);
 				}
 			}
-			usleep(7);
+			usleep(10);
 			if ((get_time() - (info->philo[i].l_chrono)) > info->philo[i].life)
 				return (philo_die(info, i));
 			i++;

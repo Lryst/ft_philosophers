@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:45 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/20 20:52:15 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/25 08:26:25 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ void	philo_think(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
+	long	chrono;
+
+	chrono = get_time();
 	if (philo->status == 2)
 	{
 		pthread_mutex_lock(philo->totem);
 		printf("%ldms %d is sleeping\n", (get_time() - philo->top),
 		philo->i + 1);
 		pthread_mutex_unlock(philo->totem);
-		usleep(philo->sleep * 1000);
+		while ((get_time() - chrono) < philo->sleep)
+			usleep(10);
 		philo->status = 3;
 	}
 }
@@ -73,7 +77,8 @@ void	philo_eat(t_philo *philo)
 		philo->r_turn += 1;
 		if (philo->r_turn == philo->turn)
 			philo->nbr_turn = 1;
-		usleep(philo->eat * 1000);
+		while ((get_time() - philo->l_chrono) < philo->eat)
+			usleep(10);
 		pthread_mutex_unlock(&philo->mutex_l->mutex);
 		pthread_mutex_unlock(&philo->mutex_r->mutex);
 		philo->status = 2;

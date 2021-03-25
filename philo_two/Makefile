@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 19:10:00 by lryst             #+#    #+#              #
-#    Updated: 2021/03/11 13:52:36 by lryst            ###   ########.fr        #
+#    Updated: 2021/03/22 20:09:27 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo_two
 #HEAD := -I./includes/ -I./libft/includes
 HEAD := -I./includes/
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 CFLAGSF = -g3 -fsanitize=address -Wall -Wextra -Werror
 
 

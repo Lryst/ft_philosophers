@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:08:27 by lryst             #+#    #+#             */
-/*   Updated: 2021/03/14 14:59:14 by lryst            ###   ########.fr       */
+/*   Updated: 2021/03/22 20:33:24 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	test(void *tmp)
 		philo_sleep(philo);
 		philo_think(philo);
 	}
-	sem_post(philo->sem);
+	sem_post(*philo->sem);
 }
 
 int		register_arg(char **av, t_info *info)
