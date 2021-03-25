@@ -18,9 +18,7 @@ void	test(void *tmp)
 
 	philo = (t_philo*)tmp;
 	philo->status = 1;
-	philo->top = get_time();
 	philo->nbr_turn = 0;
-	philo->l_chrono = get_time();
 	while (philo->start == 1)
 	{
 		philo_eat(philo);

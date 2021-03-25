@@ -59,6 +59,8 @@ void	init_philo_param(t_info *info, t_philo *philo)
 	philo->start = 1;
 	philo->r_turn = 0;
 	philo->totem = &info->totem;
+	philo->l_chrono = get_time();
+	philo->top = info->top_chrono;
 	init_fork(info, philo);
 }
 
@@ -89,6 +91,7 @@ int		init_thread_tab(t_info *info)
 	usleep(2);
 	if (lauch_philo(info, 1) == 0)
 		return (0);
+	usleep(10);
 	monitor(info);
 	return (1);
 }

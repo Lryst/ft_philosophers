@@ -57,10 +57,6 @@ int		monitor_check_count_meal(t_info *info)
 
 int		philo_die(t_info *info, int i)
 {
-	sem_close(info->totem);
-	sem_unlink("/totem");
-	if ((info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)) == SEM_FAILED)
-		return (0);
 	sem_wait(info->totem);
 	printf("%ldms %d die\n", (get_time() - info->philo[i].top), i + 1);
 	i = 0;
@@ -69,7 +65,6 @@ int		philo_die(t_info *info, int i)
 	usleep(20);
 	sem_close(info->totem);
 	sem_unlink("/totem");
-	sem_post(info->totem);
 	sem_close(info->sem);
 	sem_unlink("/eat");
 	return (0);

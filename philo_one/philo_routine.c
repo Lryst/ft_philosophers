@@ -18,9 +18,7 @@ void	test(void *tmp)
 
 	philo = (t_philo*)tmp;
 	philo->status = 1;
-	philo->top = get_time();
 	philo->nbr_turn = 0;
-	philo->l_chrono = get_time();
 	while (philo->start == 1)
 	{
 		philo_eat(philo);
@@ -59,6 +57,7 @@ int		recover_args(char **av)
 	info.arg2 = ft_atoi_lite(av[2]);
 	info.arg3 = ft_atoi_lite(av[3]);
 	info.arg4 = ft_atoi_lite(av[4]);
+	info.top_chrono = get_time();
 	if (register_arg(av, &info) != 1)
 		return (0);
 	if (init_thread_tab(&info) != 1)
