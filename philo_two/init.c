@@ -43,7 +43,6 @@ int		lauch_philo(t_info *info, int i)
 		}
 		info->i += 2;
 	}
-	//sem_close(info->totem);
 	return (1);
 }
 
@@ -52,6 +51,7 @@ int		init_thread_tab(t_info *info)
 	sem_close(info->totem);
 	sem_unlink("/totem");
 	info->i = 0;
+	info->top_chrono = get_time();
 	sem_close(info->sem);
 	sem_unlink("/eat");
 	if ((info->totem = sem_open("/totem", O_CREAT, S_IRWXU, 1)) == SEM_FAILED)
